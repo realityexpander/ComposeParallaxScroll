@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -36,14 +37,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeParallaxScrollTheme {
-                val moonScrollSpeed = 0.24f
+                val moonScrollSpeed = 0.28f
                 val midBgScrollSpeed = 0.12f
 
                 val imageHeight = (LocalConfiguration.current.screenWidthDp * (2f / 3f)).dp
                 val lazyListState = rememberLazyListState()
 
                 var moonOffset by remember {
-                    mutableStateOf(0f)
+                    mutableStateOf(200f)
                 }
                 var midBgOffset by remember {
                     mutableStateOf(0f)
@@ -84,7 +85,8 @@ class MainActivity : ComponentActivity() {
                             text = "Sample item",
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(16.dp)
+                                .padding(16.dp),
+                            color = MaterialTheme.colors.onPrimary
                         )
                     }
                     item {
@@ -107,7 +109,8 @@ class MainActivity : ComponentActivity() {
                                 contentDescription = "moon",
                                 contentScale = ContentScale.FillWidth,
                                 alignment = Alignment.BottomCenter,
-                                modifier = Modifier.matchParentSize()
+                                modifier = Modifier
+                                    .matchParentSize()
                                     .graphicsLayer {
                                         translationY = moonOffset
                                     }
@@ -117,7 +120,8 @@ class MainActivity : ComponentActivity() {
                                 contentDescription = "mid bg",
                                 contentScale = ContentScale.FillWidth,
                                 alignment = Alignment.BottomCenter,
-                                modifier = Modifier.matchParentSize()
+                                modifier = Modifier
+                                    .matchParentSize()
                                     .graphicsLayer {
                                         translationY = midBgOffset
                                     }
@@ -131,12 +135,14 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                     }
+
                     items(20) {
                         Text(
                             text = "Sample item",
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(16.dp)
+                                .padding(16.dp),
+                            color = MaterialTheme.colors.onPrimary
                         )
                     }
                 }
