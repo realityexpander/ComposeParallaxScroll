@@ -81,7 +81,7 @@ class MainActivity : ComponentActivity() {
                         .nestedScroll(nestedScrollConnection),
                     state = lazyListState
                 ) {
-                    items(10) {
+                    items(13) {
                         Text(
                             text = "Sample item",
                             modifier = Modifier
