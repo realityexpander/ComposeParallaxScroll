@@ -91,7 +91,7 @@ class MainActivity : ComponentActivity() {
                                     Brush.verticalGradient(
                                         0.0f to Color(0xFFf36b21),
                                         0.3f to Color(0xFFe35b11),
-                                        0.7f to Color(0xFF6D3C1B),
+                                        0.5f to Color(0xFF6D3C1B),
                                         1.0f to Color(0xFF6D3C1B)
                                     )
                                 )
