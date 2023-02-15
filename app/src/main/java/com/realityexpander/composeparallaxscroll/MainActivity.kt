@@ -1,4 +1,4 @@
-package com.plcoding.composeparallaxscroll
+package com.realityexpander.composeparallaxscroll
 
 import android.content.res.Resources
 import android.os.Bundle
@@ -12,8 +12,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -29,18 +27,17 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.plcoding.composeparallaxscroll.ui.theme.ComposeParallaxScrollTheme
+import com.realityexpander.composeparallaxscroll.ui.theme.ComposeParallaxScrollTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeParallaxScrollTheme {
-                val moonScrollSpeed = 0.08f
-                val midBgScrollSpeed = 0.03f
+                val moonScrollSpeed = 0.24f
+                val midBgScrollSpeed = 0.12f
 
                 val imageHeight = (LocalConfiguration.current.screenWidthDp * (2f / 3f)).dp
                 val lazyListState = rememberLazyListState()
@@ -56,6 +53,7 @@ class MainActivity : ComponentActivity() {
                     override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
                         val delta = available.y
                         val layoutInfo = lazyListState.layoutInfo
+
                         // Check if the first item is visible
                         if(lazyListState.firstVisibleItemIndex == 0) {
                             return Offset.Zero
@@ -63,6 +61,7 @@ class MainActivity : ComponentActivity() {
                         if(layoutInfo.visibleItemsInfo.lastOrNull()?.index == layoutInfo.totalItemsCount - 1) {
                             return Offset.Zero
                         }
+
                         moonOffset += delta * moonScrollSpeed
                         midBgOffset += delta * midBgScrollSpeed
                         return Offset.Zero
@@ -90,10 +89,10 @@ class MainActivity : ComponentActivity() {
                                 .height(imageHeight + midBgOffset.toDp())
                                 .background(
                                     Brush.verticalGradient(
-                                        listOf(
-                                            Color(0xFFf36b21),
-                                            Color(0xFFf9a521)
-                                        )
+                                        0.0f to Color(0xFFf36b21),
+                                        0.3f to Color(0xFFe35b11),
+                                        0.7f to Color(0xFF6D3C1B),
+                                        1.0f to Color(0xFF6D3C1B)
                                     )
                                 )
                         ) {

@@ -1,4 +1,4 @@
-package com.plcoding.composeparallaxscroll
+package com.realityexpander.composeparallaxscroll
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

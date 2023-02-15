@@ -1,4 +1,4 @@
-package com.plcoding.composeparallaxscroll
+package com.realityexpander.composeparallaxscroll
 
 import org.junit.Test
 

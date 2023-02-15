@@ -1,4 +1,4 @@
-package com.plcoding.composeparallaxscroll.ui.theme
+package com.realityexpander.composeparallaxscroll.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
