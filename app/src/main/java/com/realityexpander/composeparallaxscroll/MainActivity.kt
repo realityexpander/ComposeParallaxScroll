@@ -49,24 +49,30 @@ class MainActivity : ComponentActivity() {
                     mutableStateOf(0f)
                 }
 
-                val nestedScrollConnection = object : NestedScrollConnection {
-                    override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
-                        val delta = available.y
-                        val layoutInfo = lazyListState.layoutInfo
+                val nestedScrollConnection = remember {
+                    object : NestedScrollConnection {
+                        override fun onPreScroll(
+                            available: Offset,
+                            source: NestedScrollSource
+                        ): Offset {
+                            val delta = available.y
+                            val layoutInfo = lazyListState.layoutInfo
 
-                        // Check if the first item is visible
-                        if(lazyListState.firstVisibleItemIndex == 0) {
+                            // Check if the first item is visible
+                            if (lazyListState.firstVisibleItemIndex == 0) {
+                                return Offset.Zero
+                            }
+                            if (layoutInfo.visibleItemsInfo.lastOrNull()?.index == layoutInfo.totalItemsCount - 1) {
+                                return Offset.Zero
+                            }
+
+                            moonOffset += delta * moonScrollSpeed
+                            midBgOffset += delta * midBgScrollSpeed
                             return Offset.Zero
                         }
-                        if(layoutInfo.visibleItemsInfo.lastOrNull()?.index == layoutInfo.totalItemsCount - 1) {
-                            return Offset.Zero
-                        }
-
-                        moonOffset += delta * moonScrollSpeed
-                        midBgOffset += delta * midBgScrollSpeed
-                        return Offset.Zero
                     }
                 }
+
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxWidth()
