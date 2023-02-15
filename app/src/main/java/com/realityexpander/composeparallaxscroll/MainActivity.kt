@@ -27,6 +27,7 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -94,6 +95,7 @@ class MainActivity : ComponentActivity() {
                             modifier = Modifier
                                 .clipToBounds()
                                 .fillMaxWidth()
+//                                .height(imageHeight + midBgOffset.toDp())
                                 .height(imageHeight + midBgOffset.toDp())
                                 .background(
                                     Brush.verticalGradient(
@@ -150,7 +152,12 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun Float.toDp(): Dp {
+    private fun Float.toDpUsingSystemResources(): Dp {
         return (this / Resources.getSystem().displayMetrics.density).dp
     }
+
+    @Composable
+    private fun Float.toDp() =
+        with(LocalDensity.current) { this@toDp.toDp() }
+
 }
